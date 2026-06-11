@@ -14,4 +14,15 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findTop4ByCategoryIdAndStatusTrue(Long categoryId);
 
     List<Product> findByStatusTrue();
+     @Query("""
+        SELECT p
+        FROM Product p
+        WHERE p.category.id = :categoryId
+          AND p.status = true
+          AND p.id <> :productId
+        """)
+    List<Product> findRecommendations(
+            @Param("categoryId") Long categoryId,
+            @Param("productId") Long productId
+    );
 }

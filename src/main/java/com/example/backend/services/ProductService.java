@@ -5,108 +5,115 @@ import com.example.backend.models.Category;
 import com.example.backend.models.Product;
 import com.example.backend.repositories.CategoryRepository;
 import com.example.backend.repositories.ProductRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ProductService {
-    private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
+
+    private static final Logger logger =
+            LoggerFactory.getLogger(ProductService.class);
+
     private final CategoryRepository categoryRepository;
+
     private final ProductRepository productRepository;
 
+    // ======================
+    // DETALLE DEL PRODUCTO
+    // ======================
+
     public ProductDetailResponse getProductDetailsById(Long id) {
-        logger.info("Buscando producto id {}", id);
 
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> {
-                    logger.warn("Producto no encontrado. Id: {}", id);
+                .orElseThrow(() ->
+                        new RuntimeException("Producto no encontrado"));
 
-                    return new ResponseStatusException(
-                            HttpStatus.NOT_FOUND,
-                            "Este producto no Existe"
-                    );
-                });
-
-        logger.info("Producto encontrado: {}", product.getName());
-
-        boolean status = product.getStock() >= 0; // faltaba el "=" :v
-
-        List<RelatedProductDTO> relatedProductDTO = productRepository
-                .recommendByCategory(product.getCategory().getId(), product.getId())
+        // Obtener tamaños del producto
+        List<SizeDTO> sizes = product.getSizes()
                 .stream()
-                .map(RelatedProductDTO::new)
-                .collect(Collectors.toList());
-
-        // coleccion de talla
-        List<SizeDTO> sizesDTO = product.getSizes().
-                stream()
                 .map(size -> new SizeDTO(
                         size.getId(),
                         size.getName(),
                         size.getDimension()
                 ))
-                .collect(Collectors.toList());
+                .toList();
 
-        return new ProductDetailResponse(
-                product.getId(),
-                product.getName(),
-                product.getPrice(),
-                product.getStock(),
-                product.getImageUrl(),
-                status,
-                product.getCategory().getName(),
-                product.getCategory().getDescription(),
-                sizesDTO,
-                relatedProductDTO
-        );
-    }
+        // Obtener productos relacionados
+        List<RelatedProductDTO> relatedProducts =
+                productRepository.findRecommendations(
+                                product.getCategory().getId(),
+                                product.getId()
+                        )
+                        .stream()
+                        .limit(4)
+                        .map(RelatedProductDTO::new)
+                        .toList();
 
-    // Logica para el Admin
-    // Obtener Lista de Productos
+        return ProductDetailResponse.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .price(product.getPrice())
+                .stock(product.getStock())
+                .imageUrl(product.getImageUrl())
+                .status(product.isStatus())
+                .categoryName(product.getCategory().getName())
+                .description(product.getCategory().getDescription())
+                .sizes(sizes)
+                .relatedProducts(relatedProducts)
+                .build();
+        }
+
     public List<AdminProductResponse> getAllAdminProducts() {
+
         return productRepository.findByStatusTrue()
                 .stream()
-                .map(product -> new AdminProductResponse(
-                        product.getId(),
-                        product.getName(),
-                        product.getPrice(),
-                        product.getStock(),
-                        product.getImageUrl(),
-                        product.isStatus(),
-                        product.getCategory().getId(),
-                        product.getCategory().getName()
-                ))
+                .map(this::mapToAdminProductResponse)
                 .toList();
     }
 
-    // Crear Producto
-    public AdminProductResponse createProduct(ProductRequest request) {
+    public AdminProductResponse createProduct(
+            ProductRequest request
+    ) {
+
         logger.info("Creando producto...");
 
-        Category category = categoryRepository.findById(request.getCategoryId())
-                .orElseThrow(() -> {
-                    logger.error("Categoria no encontrada: id {}", request.getCategoryId());
-                    return new RuntimeException("Categoria no encontrada");
-                });
+        Category category =
+                categoryRepository.findById(
+                                request.getCategoryId()
+                        )
+                        .orElseThrow(() -> {
+
+                            logger.error(
+                                    "Categoria no encontrada: id {}",
+                                    request.getCategoryId()
+                            );
+
+                            return new RuntimeException(
+                                    "Categoria no encontrada"
+                            );
+                        });
 
         Product product = new Product();
 
         product.setName(request.getName());
+
         product.setPrice(request.getPrice());
+
         product.setStock(request.getStock());
+
         product.setImageUrl(request.getImageUrl());
+
         product.setCategory(category);
 
-        // si no mandan status
         product.setStatus(
                 request.getStatus() != null
                         ? request.getStatus()
@@ -114,73 +121,138 @@ public class ProductService {
         );
 
         Product saved = productRepository.save(product);
-        logger.info("Producto creado con id: {}", saved.getId());
 
-        return new AdminProductResponse(
-                saved.getId(),
-                saved.getName(),
-                saved.getPrice(),
-                saved.getStock(),
-                saved.getImageUrl(),
-                saved.isStatus(),
-                saved.getCategory().getId(),
-                saved.getCategory().getName()
+        logger.info(
+                "Producto creado con id: {}",
+                saved.getId()
         );
+
+        return mapToAdminProductResponse(saved);
     }
 
-    // Actualizar un Producto
-    public AdminProductResponse updateProduct(Long id, ProductRequest request) {
-        logger.info("Buscando producto con id {}", id);
+    // ======================
+    // ADMIN - ACTUALIZAR
+    // ======================
 
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> {
-                    logger.error("Producto no encontrado. Id: {}", id);
-                    return new RuntimeException("Producto no encontrado");
-                });
+    public AdminProductResponse updateProduct(
+            Long id,
+            ProductRequest request
+    ) {
 
-        Category category = categoryRepository.findById(request.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
+        logger.info(
+                "Buscando producto con id {}",
+                id
+        );
+
+        Product product =
+                productRepository.findById(id)
+                        .orElseThrow(() -> {
+
+                            logger.error(
+                                    "Producto no encontrado. Id: {}",
+                                    id
+                            );
+
+                            return new RuntimeException(
+                                    "Producto no encontrado"
+                            );
+                        });
+
+        Category category =
+                categoryRepository.findById(
+                                request.getCategoryId()
+                        )
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Categoria no encontrada"
+                                ));
 
         product.setName(request.getName());
+
         product.setPrice(request.getPrice());
+
         product.setStock(request.getStock());
+
         product.setImageUrl(request.getImageUrl());
+
         product.setCategory(category);
 
-        if (request.getStatus() != null) {
-            product.setStatus(request.getStatus());
-        } else {
-            product.setStatus(request.getStock() > 0);
-        }
-
-        Product updatedProduct = productRepository.save(product);
-        logger.info("Producto acutalizado con id: {}", updatedProduct.getId());
-
-        return new AdminProductResponse(
-                updatedProduct.getId(),
-                updatedProduct.getName(),
-                updatedProduct.getPrice(),
-                updatedProduct.getStock(),
-                updatedProduct.getImageUrl(),
-                updatedProduct.isStatus(),
-                updatedProduct.getCategory().getId(),
-                updatedProduct.getCategory().getName()
+        product.setStatus(
+                request.getStatus() != null
+                        ? request.getStatus()
+                        : request.getStock() > 0
         );
+
+        Product updated =
+                productRepository.save(product);
+
+        logger.info(
+                "Producto actualizado con id: {}",
+                updated.getId()
+        );
+
+        return mapToAdminProductResponse(updated);
     }
 
-    // Borrar un Producto
-    public void deleteProduct(Long id) {
-        logger.info("Buscando producto con id {}", id);
+    // ======================
+    // ADMIN - ELIMINAR
+    // ======================
 
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> {
-                    logger.error("Producto no encontrado. Id: {}", id);
-                    return new RuntimeException("Producto no encontrado");
-                });
+    public void deleteProduct(Long id) {
+
+        Product product =
+                productRepository.findById(id)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Producto no encontrado"
+                                ));
 
         product.setStatus(false);
 
         productRepository.save(product);
-        logger.info("Producto inactivo: {}", id);
+
+        logger.info(
+                "Producto inactivo: {}",
+                id
+        );
+    }
+
+    // ======================
+    // HOME - DESTACADOS
+    // ======================
+
+    public List<AdminProductResponse> getFeaturedProducts() {
+
+        return getAllAdminProducts()
+                .stream()
+                .collect(Collectors.toMap(
+                        AdminProductResponse::getCategoryId,
+                        product -> product,
+                        (existing, replacement) -> existing
+                ))
+                .values()
+                .stream()
+                .limit(4)
+                .toList();
+    }
+
+    // ======================
+    // MAPPER
+    // ======================
+
+    private AdminProductResponse mapToAdminProductResponse(
+            Product product
+    ) {
+
+        return new AdminProductResponse(
+                product.getId(),
+                product.getName(),
+                product.getPrice(),
+                product.getStock(),
+                product.getImageUrl(),
+                product.isStatus(),
+                product.getCategory().getId(),
+                product.getCategory().getName()
+        );
     }
 }

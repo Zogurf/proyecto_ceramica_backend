@@ -586,3 +586,351 @@
 2026-06-11T04:40:44.536-05:00  INFO 28136 --- [backend] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2026-06-11T04:40:44.536-05:00  INFO 28136 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2026-06-11T04:40:44.538-05:00  INFO 28136 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-06-11T05:02:11.086-05:00  INFO 28136 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Buscando producto id 1
+2026-06-11T05:02:11.115-05:00  INFO 28136 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Producto encontrado: Loro
+2026-06-11T05:02:11.224-05:00  INFO 28136 --- [backend] [http-nio-8080-exec-2] c.e.backend.services.ProductService      : Buscando producto id 1
+2026-06-11T05:02:11.241-05:00  INFO 28136 --- [backend] [http-nio-8080-exec-2] c.e.backend.services.ProductService      : Producto encontrado: Loro
+2026-06-11T05:05:52.531-05:00  INFO 28136 --- [backend] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-11T05:05:52.538-05:00  INFO 28136 --- [backend] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-06-11T05:05:52.542-05:00  INFO 28136 --- [backend] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11T05:05:52.545-05:00  INFO 28136 --- [backend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-06-11T05:05:52.552-05:00  INFO 28136 --- [backend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-06-11T05:05:55.619-05:00  INFO 29024 --- [backend] [main] com.example.backend.BackendApplication   : Starting BackendApplication using Java 21.0.6 with PID 29024 (D:\repositorios\proyecto_ceramica_backend\target\classes started by efrai in D:\repositorios\proyecto_ceramica_backend)
+2026-06-11T05:05:55.622-05:00 DEBUG 29024 --- [backend] [main] com.example.backend.BackendApplication   : Running with Spring Boot v4.0.5, Spring v7.0.6
+2026-06-11T05:05:55.623-05:00  INFO 29024 --- [backend] [main] com.example.backend.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-06-11T05:05:56.348-05:00  INFO 29024 --- [backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-11T05:05:56.401-05:00  INFO 29024 --- [backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 46 ms. Found 6 JPA repository interfaces.
+2026-06-11T05:05:56.918-05:00  INFO 29024 --- [backend] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-06-11T05:05:56.929-05:00  INFO 29024 --- [backend] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-11T05:05:56.930-05:00  INFO 29024 --- [backend] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-06-11T05:05:56.977-05:00  INFO 29024 --- [backend] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1308 ms
+2026-06-11T05:05:57.037-05:00  INFO 29024 --- [backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-11T05:05:57.362-05:00  INFO 29024 --- [backend] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6c07add6
+2026-06-11T05:05:57.363-05:00  INFO 29024 --- [backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-11T05:05:57.444-05:00  INFO 29024 --- [backend] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-11T05:05:57.502-05:00  INFO 29024 --- [backend] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-06-11T05:05:58.021-05:00  INFO 29024 --- [backend] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-11T05:05:58.109-05:00  INFO 29024 --- [backend] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/ceramic_store_db?createDatabaseIfNotExist=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.41
+	Default catalog/schema: ceramic_store_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-11T05:05:58.895-05:00  INFO 29024 --- [backend] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-11T05:05:58.978-05:00  INFO 29024 --- [backend] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11T05:05:59.031-05:00  INFO 29024 --- [backend] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-11T05:05:59.214-05:00 DEBUG 29024 --- [backend] [main] c.e.b.config.JwtAuthenticationFilter     : Filter 'jwtAuthenticationFilter' configured for use
+2026-06-11T05:05:59.343-05:00  INFO 29024 --- [backend] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-11T05:05:59.343-05:00  WARN 29024 --- [backend] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-06-11T05:05:59.396-05:00  WARN 29024 --- [backend] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-11T05:06:00.035-05:00  INFO 29024 --- [backend] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-06-11T05:06:00.039-05:00  INFO 29024 --- [backend] [main] com.example.backend.BackendApplication   : Started BackendApplication in 4.773 seconds (process running for 5.311)
+2026-06-11T05:06:04.452-05:00  INFO 29024 --- [backend] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-11T05:06:04.452-05:00  INFO 29024 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-06-11T05:06:04.453-05:00  INFO 29024 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-06-11T05:07:53.931-05:00  INFO 29024 --- [backend] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-11T05:07:53.935-05:00  INFO 29024 --- [backend] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-06-11T05:07:53.939-05:00  INFO 29024 --- [backend] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11T05:07:53.943-05:00  INFO 29024 --- [backend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-06-11T05:07:53.951-05:00  INFO 29024 --- [backend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-06-11T05:07:56.826-05:00  INFO 17808 --- [backend] [main] com.example.backend.BackendApplication   : Starting BackendApplication using Java 21.0.6 with PID 17808 (D:\repositorios\proyecto_ceramica_backend\target\classes started by efrai in D:\repositorios\proyecto_ceramica_backend)
+2026-06-11T05:07:56.829-05:00 DEBUG 17808 --- [backend] [main] com.example.backend.BackendApplication   : Running with Spring Boot v4.0.5, Spring v7.0.6
+2026-06-11T05:07:56.830-05:00  INFO 17808 --- [backend] [main] com.example.backend.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-06-11T05:07:57.368-05:00  INFO 17808 --- [backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-11T05:07:57.413-05:00  INFO 17808 --- [backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 39 ms. Found 6 JPA repository interfaces.
+2026-06-11T05:07:57.842-05:00  INFO 17808 --- [backend] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-06-11T05:07:57.852-05:00  INFO 17808 --- [backend] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-11T05:07:57.852-05:00  INFO 17808 --- [backend] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-06-11T05:07:57.903-05:00  INFO 17808 --- [backend] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1038 ms
+2026-06-11T05:07:57.954-05:00  INFO 17808 --- [backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-11T05:07:58.210-05:00  INFO 17808 --- [backend] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4861cca9
+2026-06-11T05:07:58.211-05:00  INFO 17808 --- [backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-11T05:07:58.279-05:00  INFO 17808 --- [backend] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-11T05:07:58.310-05:00  INFO 17808 --- [backend] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-06-11T05:07:58.705-05:00  INFO 17808 --- [backend] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-11T05:07:58.779-05:00  INFO 17808 --- [backend] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/ceramic_store_db?createDatabaseIfNotExist=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.41
+	Default catalog/schema: ceramic_store_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-11T05:07:59.441-05:00  INFO 17808 --- [backend] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-11T05:07:59.514-05:00  INFO 17808 --- [backend] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11T05:07:59.562-05:00  INFO 17808 --- [backend] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-11T05:07:59.697-05:00 DEBUG 17808 --- [backend] [main] c.e.b.config.JwtAuthenticationFilter     : Filter 'jwtAuthenticationFilter' configured for use
+2026-06-11T05:07:59.801-05:00  INFO 17808 --- [backend] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-11T05:07:59.802-05:00  WARN 17808 --- [backend] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-06-11T05:07:59.849-05:00  WARN 17808 --- [backend] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-11T05:08:00.424-05:00  INFO 17808 --- [backend] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-06-11T05:08:00.429-05:00  INFO 17808 --- [backend] [main] com.example.backend.BackendApplication   : Started BackendApplication in 3.93 seconds (process running for 4.387)
+2026-06-11T05:08:03.677-05:00  INFO 17808 --- [backend] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-11T05:08:03.677-05:00  INFO 17808 --- [backend] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-06-11T05:08:03.678-05:00  INFO 17808 --- [backend] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-06-11T05:11:41.278-05:00  INFO 17808 --- [backend] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-11T05:11:41.283-05:00  INFO 17808 --- [backend] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-06-11T05:11:41.287-05:00  INFO 17808 --- [backend] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11T05:11:41.290-05:00  INFO 17808 --- [backend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-06-11T05:11:41.303-05:00  INFO 17808 --- [backend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-06-11T05:11:44.180-05:00  INFO 26116 --- [backend] [main] com.example.backend.BackendApplication   : Starting BackendApplication using Java 21.0.6 with PID 26116 (D:\repositorios\proyecto_ceramica_backend\target\classes started by efrai in D:\repositorios\proyecto_ceramica_backend)
+2026-06-11T05:11:44.182-05:00 DEBUG 26116 --- [backend] [main] com.example.backend.BackendApplication   : Running with Spring Boot v4.0.5, Spring v7.0.6
+2026-06-11T05:11:44.183-05:00  INFO 26116 --- [backend] [main] com.example.backend.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-06-11T05:11:44.808-05:00  INFO 26116 --- [backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-11T05:11:44.863-05:00  INFO 26116 --- [backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 49 ms. Found 6 JPA repository interfaces.
+2026-06-11T05:11:45.320-05:00  INFO 26116 --- [backend] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-06-11T05:11:45.331-05:00  INFO 26116 --- [backend] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-11T05:11:45.332-05:00  INFO 26116 --- [backend] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-06-11T05:11:45.387-05:00  INFO 26116 --- [backend] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1160 ms
+2026-06-11T05:11:45.468-05:00  INFO 26116 --- [backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-11T05:11:45.755-05:00  INFO 26116 --- [backend] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6c07add6
+2026-06-11T05:11:45.757-05:00  INFO 26116 --- [backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-11T05:11:45.831-05:00  INFO 26116 --- [backend] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-11T05:11:45.874-05:00  INFO 26116 --- [backend] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-06-11T05:11:46.319-05:00  INFO 26116 --- [backend] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-11T05:11:46.400-05:00  INFO 26116 --- [backend] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/ceramic_store_db?createDatabaseIfNotExist=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.41
+	Default catalog/schema: ceramic_store_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-11T05:11:47.114-05:00  INFO 26116 --- [backend] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-11T05:11:47.197-05:00  INFO 26116 --- [backend] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11T05:11:47.238-05:00  INFO 26116 --- [backend] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-11T05:11:47.365-05:00 DEBUG 26116 --- [backend] [main] c.e.b.config.JwtAuthenticationFilter     : Filter 'jwtAuthenticationFilter' configured for use
+2026-06-11T05:11:47.495-05:00  INFO 26116 --- [backend] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-11T05:11:47.496-05:00  WARN 26116 --- [backend] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-06-11T05:11:47.557-05:00  WARN 26116 --- [backend] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-11T05:11:48.041-05:00  INFO 26116 --- [backend] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-06-11T05:11:48.045-05:00  INFO 26116 --- [backend] [main] com.example.backend.BackendApplication   : Started BackendApplication in 4.178 seconds (process running for 4.621)
+2026-06-11T05:11:51.308-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-11T05:11:51.309-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-06-11T05:11:51.310-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-06-11T05:13:24.419-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-1] c.e.backend.services.ProductService      : Creando producto...
+2026-06-11T05:13:24.454-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-1] c.e.backend.services.ProductService      : Producto creado con id: 11
+2026-06-11T05:56:44.879-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-5] c.e.backend.services.ProductService      : Buscando producto id 11
+2026-06-11T05:56:44.900-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-5] c.e.backend.services.ProductService      : Producto encontrado: yatusabes
+2026-06-11T05:56:44.980-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-4] c.e.backend.services.ProductService      : Buscando producto id 11
+2026-06-11T05:56:44.989-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-4] c.e.backend.services.ProductService      : Producto encontrado: yatusabes
+2026-06-11T05:56:49.137-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-10] c.e.backend.services.ProductService      : Buscando producto id 6
+2026-06-11T05:56:49.156-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-10] c.e.backend.services.ProductService      : Producto encontrado: Jarrones
+2026-06-11T05:56:49.166-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-8] c.e.backend.services.ProductService      : Buscando producto id 6
+2026-06-11T05:56:49.176-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-8] c.e.backend.services.ProductService      : Producto encontrado: Jarrones
+2026-06-11T05:56:52.174-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Buscando producto id 10
+2026-06-11T05:56:52.196-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Producto encontrado: ROJITO
+2026-06-11T05:56:52.218-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Buscando producto id 10
+2026-06-11T05:56:52.224-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Producto encontrado: ROJITO
+2026-06-11T05:56:56.167-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-1] c.e.backend.services.ProductService      : Buscando producto id 6
+2026-06-11T05:56:56.176-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-1] c.e.backend.services.ProductService      : Producto encontrado: Jarrones
+2026-06-11T05:56:56.189-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-6] c.e.backend.services.ProductService      : Buscando producto id 6
+2026-06-11T05:56:56.199-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-6] c.e.backend.services.ProductService      : Producto encontrado: Jarrones
+2026-06-11T05:56:58.797-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-2] c.e.backend.services.ProductService      : Buscando producto id 7
+2026-06-11T05:56:58.813-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-2] c.e.backend.services.ProductService      : Producto encontrado: Frutas
+2026-06-11T05:56:58.829-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-2] c.e.backend.services.ProductService      : Buscando producto id 7
+2026-06-11T05:56:58.838-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-2] c.e.backend.services.ProductService      : Producto encontrado: Frutas
+2026-06-11T05:57:40.194-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Buscando producto id 6
+2026-06-11T05:57:40.216-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Producto encontrado: Jarrones
+2026-06-11T05:57:40.228-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-1] c.e.backend.services.ProductService      : Buscando producto id 6
+2026-06-11T05:57:40.240-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-1] c.e.backend.services.ProductService      : Producto encontrado: Jarrones
+2026-06-11T05:57:48.708-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-4] c.e.backend.services.ProductService      : Buscando producto id 7
+2026-06-11T05:57:48.725-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-4] c.e.backend.services.ProductService      : Producto encontrado: Frutas
+2026-06-11T05:57:48.737-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-3] c.e.backend.services.ProductService      : Buscando producto id 7
+2026-06-11T05:57:48.747-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-3] c.e.backend.services.ProductService      : Producto encontrado: Frutas
+2026-06-11T05:58:45.945-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-10] c.e.backend.services.ProductService      : Buscando producto con id 6
+2026-06-11T05:58:46.001-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-10] c.e.backend.services.ProductService      : Producto acutalizado con id: 6
+2026-06-11T05:59:05.535-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Buscando producto con id 7
+2026-06-11T05:59:05.579-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Producto acutalizado con id: 7
+2026-06-11T06:02:17.463-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-8] c.e.backend.services.ProductService      : Buscando producto id 1
+2026-06-11T06:02:17.484-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-8] c.e.backend.services.ProductService      : Producto encontrado: Loro
+2026-06-11T06:02:17.504-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-7] c.e.backend.services.ProductService      : Buscando producto id 1
+2026-06-11T06:02:17.514-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-7] c.e.backend.services.ProductService      : Producto encontrado: Loro
+2026-06-11T06:02:21.381-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Buscando producto id 4
+2026-06-11T06:02:21.398-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Producto encontrado: Buho
+2026-06-11T06:02:21.416-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-1] c.e.backend.services.ProductService      : Buscando producto id 4
+2026-06-11T06:02:21.425-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-1] c.e.backend.services.ProductService      : Producto encontrado: Buho
+2026-06-11T06:06:58.241-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-6] c.e.backend.services.ProductService      : Buscando producto id 1
+2026-06-11T06:06:58.257-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-6] c.e.backend.services.ProductService      : Producto encontrado: Loro
+2026-06-11T06:06:58.278-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-3] c.e.backend.services.ProductService      : Buscando producto id 1
+2026-06-11T06:06:58.285-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-3] c.e.backend.services.ProductService      : Producto encontrado: Loro
+2026-06-11T06:07:00.448-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-2] c.e.backend.services.ProductService      : Buscando producto id 2
+2026-06-11T06:07:00.468-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-2] c.e.backend.services.ProductService      : Producto encontrado: Delfin Rosado
+2026-06-11T06:07:00.479-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-10] c.e.backend.services.ProductService      : Buscando producto id 2
+2026-06-11T06:07:00.488-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-10] c.e.backend.services.ProductService      : Producto encontrado: Delfin Rosado
+2026-06-11T06:07:03.428-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-8] c.e.backend.services.ProductService      : Buscando producto id 3
+2026-06-11T06:07:03.443-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-8] c.e.backend.services.ProductService      : Producto encontrado: Brujas
+2026-06-11T06:07:03.461-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-8] c.e.backend.services.ProductService      : Buscando producto id 3
+2026-06-11T06:07:03.472-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-8] c.e.backend.services.ProductService      : Producto encontrado: Brujas
+2026-06-11T06:07:53.900-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Buscando producto id 4
+2026-06-11T06:07:53.920-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Producto encontrado: Buho
+2026-06-11T06:07:53.934-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-1] c.e.backend.services.ProductService      : Buscando producto id 4
+2026-06-11T06:07:53.942-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-1] c.e.backend.services.ProductService      : Producto encontrado: Buho
+2026-06-11T06:07:57.011-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-5] c.e.backend.services.ProductService      : Buscando producto id 3
+2026-06-11T06:07:57.025-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-5] c.e.backend.services.ProductService      : Producto encontrado: Brujas
+2026-06-11T06:07:57.045-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-4] c.e.backend.services.ProductService      : Buscando producto id 3
+2026-06-11T06:07:57.051-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-4] c.e.backend.services.ProductService      : Producto encontrado: Brujas
+2026-06-11T06:09:33.198-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-8] c.e.backend.services.ProductService      : Buscando producto id 8
+2026-06-11T06:09:33.212-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-8] c.e.backend.services.ProductService      : Producto encontrado: Brujas
+2026-06-11T06:12:58.902-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-5] c.e.backend.services.ProductService      : Buscando producto id 6
+2026-06-11T06:12:58.914-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-5] c.e.backend.services.ProductService      : Producto encontrado: Jarrones 3
+2026-06-11T06:12:58.936-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-1] c.e.backend.services.ProductService      : Buscando producto id 6
+2026-06-11T06:12:58.941-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-1] c.e.backend.services.ProductService      : Producto encontrado: Jarrones 3
+2026-06-11T06:13:03.958-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-6] c.e.backend.services.ProductService      : Buscando producto id 1
+2026-06-11T06:13:03.973-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-6] c.e.backend.services.ProductService      : Producto encontrado: Loro
+2026-06-11T06:13:03.990-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-6] c.e.backend.services.ProductService      : Buscando producto id 1
+2026-06-11T06:13:03.998-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-6] c.e.backend.services.ProductService      : Producto encontrado: Loro
+2026-06-11T06:19:40.131-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-7] c.e.backend.services.ProductService      : Buscando producto con id 1
+2026-06-11T06:19:40.160-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-7] c.e.backend.services.ProductService      : Producto inactivo: 1
+2026-06-11T06:19:42.120-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-1] c.e.backend.services.ProductService      : Buscando producto con id 2
+2026-06-11T06:19:42.147-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-1] c.e.backend.services.ProductService      : Producto inactivo: 2
+2026-06-11T06:19:43.910-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-3] c.e.backend.services.ProductService      : Buscando producto con id 4
+2026-06-11T06:19:43.931-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-3] c.e.backend.services.ProductService      : Producto inactivo: 4
+2026-06-11T06:19:45.644-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-6] c.e.backend.services.ProductService      : Buscando producto con id 5
+2026-06-11T06:19:45.674-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-6] c.e.backend.services.ProductService      : Producto inactivo: 5
+2026-06-11T06:19:47.904-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-2] c.e.backend.services.ProductService      : Buscando producto con id 6
+2026-06-11T06:19:47.923-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-2] c.e.backend.services.ProductService      : Producto inactivo: 6
+2026-06-11T06:19:50.010-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-7] c.e.backend.services.ProductService      : Buscando producto con id 7
+2026-06-11T06:19:50.034-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-7] c.e.backend.services.ProductService      : Producto inactivo: 7
+2026-06-11T06:19:51.273-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-1] c.e.backend.services.ProductService      : Buscando producto con id 8
+2026-06-11T06:19:51.291-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-1] c.e.backend.services.ProductService      : Producto inactivo: 8
+2026-06-11T06:19:52.594-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-3] c.e.backend.services.ProductService      : Buscando producto con id 9
+2026-06-11T06:19:52.616-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-3] c.e.backend.services.ProductService      : Producto inactivo: 9
+2026-06-11T06:19:54.884-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-6] c.e.backend.services.ProductService      : Buscando producto con id 10
+2026-06-11T06:19:54.907-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-6] c.e.backend.services.ProductService      : Producto inactivo: 10
+2026-06-11T06:19:56.347-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-2] c.e.backend.services.ProductService      : Buscando producto con id 11
+2026-06-11T06:19:56.364-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-2] c.e.backend.services.ProductService      : Producto inactivo: 11
+2026-06-11T06:21:14.462-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-6] c.e.backend.services.ProductService      : Creando producto...
+2026-06-11T06:21:14.480-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-6] c.e.backend.services.ProductService      : Producto creado con id: 12
+2026-06-11T06:21:45.392-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-8] c.e.backend.services.ProductService      : Creando producto...
+2026-06-11T06:21:45.420-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-8] c.e.backend.services.ProductService      : Producto creado con id: 13
+2026-06-11T06:22:11.985-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-4] c.e.backend.services.ProductService      : Creando producto...
+2026-06-11T06:22:12.005-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-4] c.e.backend.services.ProductService      : Producto creado con id: 14
+2026-06-11T06:22:40.344-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Creando producto...
+2026-06-11T06:22:40.358-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Producto creado con id: 15
+2026-06-11T06:23:10.518-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-2] c.e.backend.services.ProductService      : Creando producto...
+2026-06-11T06:23:10.532-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-2] c.e.backend.services.ProductService      : Producto creado con id: 16
+2026-06-11T06:23:37.344-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-5] c.e.backend.services.ProductService      : Creando producto...
+2026-06-11T06:23:37.358-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-5] c.e.backend.services.ProductService      : Producto creado con id: 17
+2026-06-11T06:23:51.981-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-7] c.e.backend.services.ProductService      : Creando producto...
+2026-06-11T06:23:52.030-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-7] c.e.backend.services.ProductService      : Producto creado con id: 18
+2026-06-11T06:24:17.272-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-4] c.e.backend.services.ProductService      : Creando producto...
+2026-06-11T06:24:17.332-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-4] c.e.backend.services.ProductService      : Producto creado con id: 19
+2026-06-11T06:25:22.270-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-6] c.e.backend.services.ProductService      : Creando producto...
+2026-06-11T06:25:22.284-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-6] c.e.backend.services.ProductService      : Producto creado con id: 20
+2026-06-11T06:25:42.333-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-8] c.e.backend.services.ProductService      : Creando producto...
+2026-06-11T06:25:42.352-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-8] c.e.backend.services.ProductService      : Producto creado con id: 21
+2026-06-11T06:26:06.616-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-10] c.e.backend.services.ProductService      : Creando producto...
+2026-06-11T06:26:06.628-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-10] c.e.backend.services.ProductService      : Producto creado con id: 22
+2026-06-11T06:26:39.157-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-1] c.e.backend.services.ProductService      : Creando producto...
+2026-06-11T06:26:39.178-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-1] c.e.backend.services.ProductService      : Producto creado con id: 23
+2026-06-11T06:26:54.330-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Buscando producto id 20
+2026-06-11T06:26:54.347-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Producto encontrado: Aguila
+2026-06-11T06:26:54.361-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-6] c.e.backend.services.ProductService      : Buscando producto id 20
+2026-06-11T06:26:54.367-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-6] c.e.backend.services.ProductService      : Producto encontrado: Aguila
+2026-06-11T06:27:50.285-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-5] c.e.backend.services.ProductService      : Buscando producto id 20
+2026-06-11T06:27:50.292-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-5] c.e.backend.services.ProductService      : Producto encontrado: Aguila
+2026-06-11T06:42:47.907-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-3] c.e.backend.services.ProductService      : Buscando producto id 20
+2026-06-11T06:42:47.918-05:00  INFO 26116 --- [backend] [http-nio-8080-exec-3] c.e.backend.services.ProductService      : Producto encontrado: Aguila
+2026-06-11T06:42:58.985-05:00  INFO 26116 --- [backend] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-11T06:42:58.990-05:00  INFO 26116 --- [backend] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-06-11T06:42:59.002-05:00  INFO 26116 --- [backend] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11T06:42:59.006-05:00  INFO 26116 --- [backend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-06-11T06:42:59.011-05:00  INFO 26116 --- [backend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-06-11T06:43:02.785-05:00  INFO 19684 --- [backend] [main] com.example.backend.BackendApplication   : Starting BackendApplication using Java 21.0.6 with PID 19684 (D:\repositorios\proyecto_ceramica_backend\target\classes started by efrai in D:\repositorios\proyecto_ceramica_backend)
+2026-06-11T06:43:02.788-05:00 DEBUG 19684 --- [backend] [main] com.example.backend.BackendApplication   : Running with Spring Boot v4.0.5, Spring v7.0.6
+2026-06-11T06:43:02.789-05:00  INFO 19684 --- [backend] [main] com.example.backend.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-06-11T06:43:03.406-05:00  INFO 19684 --- [backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-11T06:43:03.459-05:00  INFO 19684 --- [backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 45 ms. Found 6 JPA repository interfaces.
+2026-06-11T06:43:04.004-05:00  INFO 19684 --- [backend] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-06-11T06:43:04.016-05:00  INFO 19684 --- [backend] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-11T06:43:04.016-05:00  INFO 19684 --- [backend] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-06-11T06:43:04.064-05:00  INFO 19684 --- [backend] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1230 ms
+2026-06-11T06:43:04.134-05:00  INFO 19684 --- [backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-11T06:43:04.474-05:00  INFO 19684 --- [backend] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@54489296
+2026-06-11T06:43:04.476-05:00  INFO 19684 --- [backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-11T06:43:04.560-05:00  INFO 19684 --- [backend] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-11T06:43:04.619-05:00  INFO 19684 --- [backend] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-06-11T06:43:05.078-05:00  INFO 19684 --- [backend] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-11T06:43:05.161-05:00  INFO 19684 --- [backend] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/ceramic_store_db?createDatabaseIfNotExist=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.41
+	Default catalog/schema: ceramic_store_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-11T06:43:05.928-05:00  INFO 19684 --- [backend] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-11T06:43:06.010-05:00  INFO 19684 --- [backend] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11T06:43:06.054-05:00  INFO 19684 --- [backend] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-11T06:43:06.192-05:00 DEBUG 19684 --- [backend] [main] c.e.b.config.JwtAuthenticationFilter     : Filter 'jwtAuthenticationFilter' configured for use
+2026-06-11T06:43:06.745-05:00  INFO 19684 --- [backend] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-11T06:43:06.745-05:00  WARN 19684 --- [backend] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-06-11T06:43:06.800-05:00  WARN 19684 --- [backend] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-11T06:43:07.286-05:00  INFO 19684 --- [backend] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-06-11T06:43:07.291-05:00  INFO 19684 --- [backend] [main] com.example.backend.BackendApplication   : Started BackendApplication in 4.823 seconds (process running for 5.259)
+2026-06-11T06:43:11.460-05:00  INFO 19684 --- [backend] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-11T06:43:11.461-05:00  INFO 19684 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-06-11T06:43:11.462-05:00  INFO 19684 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-06-11T06:57:33.568-05:00  INFO 19684 --- [backend] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-11T06:57:33.573-05:00  INFO 19684 --- [backend] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-06-11T06:57:33.578-05:00  INFO 19684 --- [backend] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11T06:57:33.584-05:00  INFO 19684 --- [backend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-06-11T06:57:33.590-05:00  INFO 19684 --- [backend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-06-11T06:57:36.778-05:00  INFO 27252 --- [backend] [main] com.example.backend.BackendApplication   : Starting BackendApplication using Java 21.0.6 with PID 27252 (D:\repositorios\proyecto_ceramica_backend\target\classes started by efrai in D:\repositorios\proyecto_ceramica_backend)
+2026-06-11T06:57:36.781-05:00 DEBUG 27252 --- [backend] [main] com.example.backend.BackendApplication   : Running with Spring Boot v4.0.5, Spring v7.0.6
+2026-06-11T06:57:36.782-05:00  INFO 27252 --- [backend] [main] com.example.backend.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-06-11T06:57:37.365-05:00  INFO 27252 --- [backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-11T06:57:37.414-05:00  INFO 27252 --- [backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 42 ms. Found 6 JPA repository interfaces.
+2026-06-11T06:57:37.905-05:00  INFO 27252 --- [backend] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-06-11T06:57:37.915-05:00  INFO 27252 --- [backend] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-11T06:57:37.916-05:00  INFO 27252 --- [backend] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-06-11T06:57:37.967-05:00  INFO 27252 --- [backend] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1143 ms
+2026-06-11T06:57:38.013-05:00  INFO 27252 --- [backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-11T06:57:38.346-05:00  INFO 27252 --- [backend] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6c8f4bc7
+2026-06-11T06:57:38.349-05:00  INFO 27252 --- [backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-11T06:57:38.429-05:00  INFO 27252 --- [backend] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-11T06:57:38.485-05:00  INFO 27252 --- [backend] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-06-11T06:57:38.937-05:00  INFO 27252 --- [backend] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-11T06:57:39.019-05:00  INFO 27252 --- [backend] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/ceramic_store_db?createDatabaseIfNotExist=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.41
+	Default catalog/schema: ceramic_store_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-11T06:57:39.773-05:00  INFO 27252 --- [backend] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-11T06:57:39.843-05:00  INFO 27252 --- [backend] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11T06:57:39.885-05:00  INFO 27252 --- [backend] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-11T06:57:40.039-05:00 DEBUG 27252 --- [backend] [main] c.e.b.config.JwtAuthenticationFilter     : Filter 'jwtAuthenticationFilter' configured for use
+2026-06-11T06:57:40.626-05:00  INFO 27252 --- [backend] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-11T06:57:40.628-05:00  WARN 27252 --- [backend] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-06-11T06:57:40.720-05:00  WARN 27252 --- [backend] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-11T06:57:41.285-05:00  INFO 27252 --- [backend] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-06-11T06:57:41.290-05:00  INFO 27252 --- [backend] [main] com.example.backend.BackendApplication   : Started BackendApplication in 4.834 seconds (process running for 5.282)
+2026-06-11T06:57:44.068-05:00  INFO 27252 --- [backend] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-11T06:57:44.068-05:00  INFO 27252 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-06-11T06:57:44.070-05:00  INFO 27252 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
