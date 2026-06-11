@@ -496,3 +496,93 @@
 2026-06-10T18:45:30.723-05:00  INFO 34740 --- [backend] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2026-06-10T18:45:30.723-05:00  INFO 34740 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2026-06-10T18:45:30.724-05:00  INFO 34740 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-06-11T03:41:25.206-05:00  INFO 8816 --- [backend] [main] com.example.backend.BackendApplication   : Starting BackendApplication using Java 21.0.6 with PID 8816 (D:\repositorios\proyecto_ceramica_backend\target\classes started by efrai in D:\repositorios\proyecto_ceramica_backend)
+2026-06-11T03:41:25.209-05:00 DEBUG 8816 --- [backend] [main] com.example.backend.BackendApplication   : Running with Spring Boot v4.0.5, Spring v7.0.6
+2026-06-11T03:41:25.210-05:00  INFO 8816 --- [backend] [main] com.example.backend.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-06-11T03:41:25.887-05:00  INFO 8816 --- [backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-11T03:41:25.947-05:00  INFO 8816 --- [backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 51 ms. Found 6 JPA repository interfaces.
+2026-06-11T03:41:26.492-05:00  INFO 8816 --- [backend] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-06-11T03:41:26.505-05:00  INFO 8816 --- [backend] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-11T03:41:26.505-05:00  INFO 8816 --- [backend] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-06-11T03:41:26.556-05:00  INFO 8816 --- [backend] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1293 ms
+2026-06-11T03:41:26.612-05:00  INFO 8816 --- [backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-11T03:41:27.017-05:00  INFO 8816 --- [backend] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@44faa4f2
+2026-06-11T03:41:27.019-05:00  INFO 8816 --- [backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-11T03:41:27.098-05:00  INFO 8816 --- [backend] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-11T03:41:27.155-05:00  INFO 8816 --- [backend] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-06-11T03:41:27.663-05:00  INFO 8816 --- [backend] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-11T03:41:27.776-05:00  INFO 8816 --- [backend] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/ceramic_store_db?createDatabaseIfNotExist=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.41
+	Default catalog/schema: ceramic_store_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-11T03:41:28.596-05:00  INFO 8816 --- [backend] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-11T03:41:28.689-05:00  INFO 8816 --- [backend] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11T03:41:28.734-05:00  INFO 8816 --- [backend] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-11T03:41:28.874-05:00 DEBUG 8816 --- [backend] [main] c.e.b.config.JwtAuthenticationFilter     : Filter 'jwtAuthenticationFilter' configured for use
+2026-06-11T03:41:28.991-05:00  INFO 8816 --- [backend] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-11T03:41:28.992-05:00  WARN 8816 --- [backend] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-06-11T03:41:29.057-05:00  WARN 8816 --- [backend] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-11T03:41:29.651-05:00  INFO 8816 --- [backend] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-06-11T03:41:29.657-05:00  INFO 8816 --- [backend] [main] com.example.backend.BackendApplication   : Started BackendApplication in 4.828 seconds (process running for 5.433)
+2026-06-11T03:41:48.490-05:00  INFO 8816 --- [backend] [http-nio-8080-exec-4] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-11T03:41:48.491-05:00  INFO 8816 --- [backend] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-06-11T03:41:48.493-05:00  INFO 8816 --- [backend] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-06-11T03:43:30.923-05:00  WARN 8816 --- [backend] [http-nio-8080-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2026-06-11T03:51:45.982-05:00  WARN 8816 --- [backend] [http-nio-8080-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2026-06-11T04:22:20.597-05:00  INFO 8816 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Creando producto...
+2026-06-11T04:22:20.703-05:00  INFO 8816 --- [backend] [http-nio-8080-exec-9] c.e.backend.services.ProductService      : Producto creado con id: 10
+2026-06-11T04:27:27.395-05:00  WARN 8816 --- [backend] [http-nio-8080-exec-8] c.example.backend.services.EmailService  : SMTP no configurado. Codigo de recuperacion para efrainqn16@gmail.com: 524722
+2026-06-11T04:29:47.326-05:00  WARN 8816 --- [backend] [http-nio-8080-exec-2] c.example.backend.services.EmailService  : SMTP no configurado. Codigo de recuperacion para efrainqn16@gmail.com: 650109
+2026-06-11T04:34:08.796-05:00  WARN 8816 --- [backend] [http-nio-8080-exec-6] c.example.backend.services.EmailService  : SMTP no configurado. Codigo de recuperacion para ellanoteama160104@gmail.com: 396495
+2026-06-11T04:39:29.285-05:00  INFO 8816 --- [backend] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-11T04:39:29.292-05:00  INFO 8816 --- [backend] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-06-11T04:39:29.296-05:00  INFO 8816 --- [backend] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11T04:39:29.299-05:00  INFO 8816 --- [backend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-06-11T04:39:29.306-05:00  INFO 8816 --- [backend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-06-11T04:39:33.956-05:00  INFO 28136 --- [backend] [main] com.example.backend.BackendApplication   : Starting BackendApplication using Java 21.0.6 with PID 28136 (D:\repositorios\proyecto_ceramica_backend\target\classes started by efrai in D:\repositorios\proyecto_ceramica_backend)
+2026-06-11T04:39:33.959-05:00 DEBUG 28136 --- [backend] [main] com.example.backend.BackendApplication   : Running with Spring Boot v4.0.5, Spring v7.0.6
+2026-06-11T04:39:33.960-05:00  INFO 28136 --- [backend] [main] com.example.backend.BackendApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-06-11T04:39:34.676-05:00  INFO 28136 --- [backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-11T04:39:34.744-05:00  INFO 28136 --- [backend] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 61 ms. Found 6 JPA repository interfaces.
+2026-06-11T04:39:35.520-05:00  INFO 28136 --- [backend] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-06-11T04:39:35.538-05:00  INFO 28136 --- [backend] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-11T04:39:35.539-05:00  INFO 28136 --- [backend] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-06-11T04:39:35.610-05:00  INFO 28136 --- [backend] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1584 ms
+2026-06-11T04:39:35.684-05:00  INFO 28136 --- [backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-11T04:39:36.186-05:00  INFO 28136 --- [backend] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6c07add6
+2026-06-11T04:39:36.190-05:00  INFO 28136 --- [backend] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-11T04:39:36.332-05:00  INFO 28136 --- [backend] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-11T04:39:36.417-05:00  INFO 28136 --- [backend] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-06-11T04:39:37.092-05:00  INFO 28136 --- [backend] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-11T04:39:37.209-05:00  INFO 28136 --- [backend] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/ceramic_store_db?createDatabaseIfNotExist=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.41
+	Default catalog/schema: ceramic_store_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-11T04:39:38.189-05:00  INFO 28136 --- [backend] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-11T04:39:38.356-05:00  INFO 28136 --- [backend] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-11T04:39:38.418-05:00  INFO 28136 --- [backend] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-11T04:39:38.627-05:00 DEBUG 28136 --- [backend] [main] c.e.b.config.JwtAuthenticationFilter     : Filter 'jwtAuthenticationFilter' configured for use
+2026-06-11T04:39:38.791-05:00  INFO 28136 --- [backend] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-11T04:39:38.791-05:00  WARN 28136 --- [backend] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-06-11T04:39:38.879-05:00  WARN 28136 --- [backend] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-11T04:39:39.982-05:00  INFO 28136 --- [backend] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-06-11T04:39:39.988-05:00  INFO 28136 --- [backend] [main] com.example.backend.BackendApplication   : Started BackendApplication in 6.394 seconds (process running for 6.999)
+2026-06-11T04:40:44.536-05:00  INFO 28136 --- [backend] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-11T04:40:44.536-05:00  INFO 28136 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-06-11T04:40:44.538-05:00  INFO 28136 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
