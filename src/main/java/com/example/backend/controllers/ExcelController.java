@@ -4,6 +4,7 @@ import com.example.backend.repositories.PersonaRepository;
 import com.example.backend.repositories.ProductRepository;
 import com.example.backend.repositories.UserRepository;
 import com.example.backend.services.ExcelExportService;
+import com.example.backend.services.PdfExportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ public class ExcelController {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
     private final ExcelExportService excelExportService;
+    private final PdfExportService pdfExportService;
 
     @GetMapping("/personas")
     public ResponseEntity<byte[]> exportPersonasExcel() {
@@ -51,6 +53,36 @@ public class ExcelController {
         try {
             byte[] excelFile = excelExportService.exportUsersToExcel(userRepository.findAll());
             return buildDownloadResponse(excelFile, "usuarios_" + System.currentTimeMillis() + ".xlsx");
+        } catch (IOException ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @GetMapping("/pdf/personas")
+    public ResponseEntity<byte[]> exportPersonasPdf() {
+        try {
+            byte[] pdfFile = pdfExportService.exportPersonasToPdf(personaRepository.findAll());
+            return buildDownloadResponse(pdfFile, "personas_" + System.currentTimeMillis() + ".pdf");
+        } catch (IOException ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @GetMapping("/pdf/products")
+    public ResponseEntity<byte[]> exportProductsPdf() {
+        try {
+            byte[] pdfFile = pdfExportService.exportProductsToPdf(productRepository.findAll());
+            return buildDownloadResponse(pdfFile, "productos_" + System.currentTimeMillis() + ".pdf");
+        } catch (IOException ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @GetMapping("/pdf/users")
+    public ResponseEntity<byte[]> exportUsersPdf() {
+        try {
+            byte[] pdfFile = pdfExportService.exportUsersToPdf(userRepository.findAll());
+            return buildDownloadResponse(pdfFile, "usuarios_" + System.currentTimeMillis() + ".pdf");
         } catch (IOException ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
