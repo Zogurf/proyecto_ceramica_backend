@@ -1,6 +1,4 @@
 package com.example.backend.controllers;
-
-import com.example.backend.dto.ReniecPersonResponse;
 import com.example.backend.services.ReniecService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
