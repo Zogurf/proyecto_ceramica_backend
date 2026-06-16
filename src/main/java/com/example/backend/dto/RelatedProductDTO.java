@@ -2,7 +2,6 @@ package com.example.backend.dto;
 
 
 import com.example.backend.models.Product;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
