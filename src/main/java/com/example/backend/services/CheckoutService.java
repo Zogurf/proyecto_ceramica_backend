@@ -5,6 +5,7 @@ import com.example.backend.dto.CheckoutRequest;
 import com.example.backend.dto.CheckoutResponse;
 import com.example.backend.dto.OrderItemResponse;
 import com.example.backend.dto.OrderResponse;
+import com.example.backend.dto.UpdateFulfillmentStatusRequest;
 import com.example.backend.models.Order;
 import com.example.backend.models.OrderItem;
 import com.example.backend.models.Payment;
@@ -35,6 +36,7 @@ public class CheckoutService {
     private final ProductRepository productRepository;
     private final OrderRepository orderRepository;
     private final PaymentRepository paymentRepository;
+    private final EmailService emailService;
 
     @Value("${stripe.secret-key:}")
     private String stripeSecretKey;
@@ -53,8 +55,13 @@ public class CheckoutService {
         User user = currentUserService.getCurrentUser();
         Order order = new Order();
         order.setStatus("PENDING");
+        order.setFulfillmentStatus("PENDING_SHIPMENT");
         order.setRegisterDate(LocalDateTime.now());
         order.setPersona(user.getPersona());
+        order.setCustomerName(request.customerName().trim());
+        order.setCustomerEmail(request.customerEmail().trim().toLowerCase());
+        order.setShippingAddress(request.shippingAddress().trim());
+        order.setShippingReference(request.shippingReference());
 
         double total = 0;
         for (CheckoutItemRequest itemRequest : request.items()) {
@@ -79,7 +86,7 @@ public class CheckoutService {
         order.setTotal(roundMoney(total));
         Order savedOrder = orderRepository.save(order);
 
-        Map<String, Object> session = createStripeSession(savedOrder, user);
+        Map<String, Object> session = createStripeSession(savedOrder);
         savedOrder.setStripeSessionId((String) session.get("id"));
         orderRepository.save(savedOrder);
 
@@ -119,6 +126,8 @@ public class CheckoutService {
             paymentRepository.save(payment);
         }
 
+        emailService.sendPurchaseConfirmation(order);
+
         return toResponse(order);
     }
 
@@ -130,12 +139,48 @@ public class CheckoutService {
                 .toList();
     }
 
-    private Map<String, Object> createStripeSession(Order order, User user) {
+    @Transactional(readOnly = true)
+    public List<OrderResponse> getMyOrders() {
+        User user = currentUserService.getCurrentUser();
+        return orderRepository.findByPersonaIdOrderByRegisterDateDesc(user.getPersona().getId())
+                .stream()
+                .map(this::toResponse)
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public OrderResponse getMyOrder(Long orderId) {
+        User user = currentUserService.getCurrentUser();
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
+
+        if (order.getPersona() == null || !order.getPersona().getId().equals(user.getPersona().getId())) {
+            throw new RuntimeException("No tienes acceso a este pedido");
+        }
+
+        return toResponse(order);
+    }
+
+    @Transactional
+    public OrderResponse updateFulfillmentStatus(Long orderId, UpdateFulfillmentStatusRequest request) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
+
+        String status = request.fulfillmentStatus().trim().toUpperCase();
+        if (!List.of("PENDING_SHIPMENT", "SHIPPED").contains(status)) {
+            throw new RuntimeException("Estado de envio no valido");
+        }
+
+        order.setFulfillmentStatus(status);
+        return toResponse(orderRepository.save(order));
+    }
+
+    private Map<String, Object> createStripeSession(Order order) {
         MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
         form.add("mode", "payment");
         form.add("success_url", frontendUrl + "/checkout/success?session_id={CHECKOUT_SESSION_ID}");
         form.add("cancel_url", frontendUrl + "/carrito");
-        form.add("customer_email", user.getEmail());
+        form.add("customer_email", order.getCustomerEmail());
         form.add("metadata[order_id]", String.valueOf(order.getId()));
 
         for (int index = 0; index < order.getItems().size(); index++) {
@@ -176,11 +221,19 @@ public class CheckoutService {
         return new OrderResponse(
                 order.getId(),
                 order.getStatus(),
+                order.getFulfillmentStatus() != null ? order.getFulfillmentStatus() : "PENDING_SHIPMENT",
                 order.getRegisterDate(),
                 order.getTotal(),
-                order.getPersona() != null ? order.getPersona().getName() : "Cliente",
+                order.getCustomerName() != null ? order.getCustomerName() : resolveCustomerName(order),
+                order.getCustomerEmail() != null ? order.getCustomerEmail() : "",
+                order.getShippingAddress() != null ? order.getShippingAddress() : "",
+                order.getShippingReference(),
                 order.getItems().stream().map(this::toItemResponse).toList()
         );
+    }
+
+    private String resolveCustomerName(Order order) {
+        return order.getPersona() != null ? order.getPersona().getName() : "Cliente";
     }
 
     private OrderItemResponse toItemResponse(OrderItem item) {

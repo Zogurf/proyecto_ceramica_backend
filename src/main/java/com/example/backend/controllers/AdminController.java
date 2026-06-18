@@ -7,6 +7,7 @@ import com.example.backend.dto.CampaignResponse;
 import com.example.backend.dto.OrderResponse;
 import com.example.backend.dto.ProductRequest;
 import com.example.backend.dto.PurchaseIntentResponse;
+import com.example.backend.dto.UpdateFulfillmentStatusRequest;
 import com.example.backend.repositories.UserRepository;
 import com.example.backend.services.CheckoutService;
 import com.example.backend.services.GeminiCampaignService;
@@ -49,6 +50,14 @@ public class AdminController {
     @GetMapping("/orders")
     public List<OrderResponse> getOrders() {
         return checkoutService.getAdminOrders();
+    }
+
+    @PutMapping("/orders/{orderId}/fulfillment")
+    public OrderResponse updateOrderFulfillment(
+            @PathVariable Long orderId,
+            @Valid @RequestBody UpdateFulfillmentStatusRequest request
+    ) {
+        return checkoutService.updateFulfillmentStatus(orderId, request);
     }
 
     @GetMapping("/purchase-intentions")

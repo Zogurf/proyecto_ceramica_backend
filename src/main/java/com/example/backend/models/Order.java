@@ -25,6 +25,9 @@ public class Order {
     @Column(nullable = false)
     private String status;
 
+    @Column(name = "fulfillment_status")
+    private String fulfillmentStatus;
+
     @Column(nullable = false, name = "register_date")
     private LocalDateTime registerDate;
 
@@ -33,6 +36,18 @@ public class Order {
 
     @Column(name = "stripe_session_id", unique = true)
     private String stripeSessionId;
+
+    @Column(name = "customer_name")
+    private String customerName;
+
+    @Column(name = "customer_email")
+    private String customerEmail;
+
+    @Column(name = "shipping_address")
+    private String shippingAddress;
+
+    @Column(name = "shipping_reference")
+    private String shippingReference;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_client")

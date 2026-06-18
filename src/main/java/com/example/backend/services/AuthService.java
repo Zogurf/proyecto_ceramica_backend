@@ -56,7 +56,7 @@ public class AuthService {
         var user = userRepository.findByEmail(request.email()).orElseThrow();
         String token = jwtService.generateToken(userDetails);
 
-        return new LoginResponse(token, user.getPersona().getName(), user.getRole().getName());
+        return new LoginResponse(token, user.getPersona().getName(), user.getRole().getName(), user.getEmail());
     }
 
     public LoginResponse loginWithGoogle(GoogleLoginRequest request) {
@@ -74,7 +74,7 @@ public class AuthService {
                 .build();
 
         String token = jwtService.generateToken(userDetails);
-        return new LoginResponse(token, user.getPersona().getName(), user.getRole().getName());
+        return new LoginResponse(token, user.getPersona().getName(), user.getRole().getName(), user.getEmail());
     }
 
     public void register(RegisterRequest request) {

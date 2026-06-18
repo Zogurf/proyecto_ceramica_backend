@@ -1,5 +1,7 @@
 package com.example.backend.services;
 
+import com.example.backend.models.Order;
+import com.example.backend.models.OrderItem;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,6 +97,47 @@ public class EmailService {
         }
     }
 
+    public void sendPurchaseConfirmation(Order order) {
+        String subject = "Gracias por tu compra en El mundo de Mery";
+        String html = buildPurchaseConfirmationHtml(order);
+        sendHtmlEmail(order.getCustomerEmail(), subject, html, "No se pudo enviar el correo de confirmacion de compra");
+    }
+
+    private void sendHtmlEmail(String toEmail, String subject, String htmlBody, String errorMessage) {
+        if (mailHost == null || mailHost.isBlank()) {
+            log.warn("SMTP no configurado. Correo para {} con asunto {} no enviado.", toEmail, subject);
+            return;
+        }
+
+        JavaMailSender mailSender = mailSenderProvider.getIfAvailable();
+        if (mailSender == null) {
+            log.warn("JavaMailSender no disponible. Correo para {} con asunto {} no enviado.", toEmail, subject);
+            return;
+        }
+
+        try {
+            var message = mailSender.createMimeMessage();
+            var helper = new MimeMessageHelper(message, true, "UTF-8");
+            if (fromEmail != null && !fromEmail.isBlank()) {
+                helper.setFrom(fromEmail);
+            }
+            helper.setTo(toEmail);
+            helper.setSubject(subject);
+            helper.setText(stripHtml(htmlBody), htmlBody);
+
+            mailSender.send(message);
+        } catch (MailAuthenticationException ex) {
+            log.error("Gmail rechazo las credenciales SMTP configuradas para {}", fromEmail);
+            throw new RuntimeException("No se pudo autenticar el correo emisor. Revisa la contrasena de aplicacion de Gmail", ex);
+        } catch (MailException ex) {
+            log.error("{} a {}: {}", errorMessage, toEmail, ex.getMessage());
+            throw new RuntimeException(errorMessage + ". Revisa la configuracion SMTP", ex);
+        } catch (Exception ex) {
+            log.error("{} para {}: {}", errorMessage, toEmail, ex.getMessage());
+            throw new RuntimeException(errorMessage, ex);
+        }
+    }
+
     private String stripHtml(String html) {
         if (html == null) {
             return "";
@@ -164,5 +207,98 @@ public class EmailService {
                   </body>
                 </html>
                 """.formatted(code);
+    }
+
+    private String buildPurchaseConfirmationHtml(Order order) {
+        String rows = order.getItems()
+                .stream()
+                .map(this::buildOrderItemRow)
+                .reduce("", String::concat);
+
+        return """
+                <!doctype html>
+                <html lang="es">
+                  <head>
+                    <meta charset="UTF-8" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                    <title>Gracias por tu compra</title>
+                  </head>
+                  <body style="margin:0; padding:0; background:#f6efe8; font-family:Arial, Helvetica, sans-serif; color:#2d211b;">
+                    <table role="presentation" width="100%%" cellpadding="0" cellspacing="0" style="background:#f6efe8; padding:32px 16px;">
+                      <tr>
+                        <td align="center">
+                          <table role="presentation" width="100%%" cellpadding="0" cellspacing="0" style="max-width:620px; background:#fffdfb; border:1px solid rgba(72,49,35,0.16); border-radius:24px; overflow:hidden; box-shadow:0 24px 60px rgba(50,29,18,0.16);">
+                            <tr>
+                              <td style="background:#2d211b; padding:26px 28px;">
+                                <p style="margin:0; color:#d9b49d; font-size:12px; font-weight:700; letter-spacing:1.4px; text-transform:uppercase;">El mundo de Mery</p>
+                                <h1 style="margin:8px 0 0; color:#ffffff; font-size:28px; line-height:1.15; font-weight:700;">Gracias por tu compra</h1>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="padding:28px;">
+                                <p style="margin:0 0 14px; color:#2d211b; font-size:16px; line-height:1.6;">Hola %s,</p>
+                                <p style="margin:0 0 22px; color:#70594b; font-size:15px; line-height:1.7;">
+                                  Recibimos tu pedido #%s correctamente. Te avisaremos cuando tus productos sean enviados.
+                                </p>
+
+                                <table role="presentation" width="100%%" cellpadding="0" cellspacing="0" style="border-collapse:collapse; margin:0 0 24px;">
+                                  %s
+                                </table>
+
+                                <div style="margin:0 0 24px; padding:18px; border:1px solid rgba(165,111,83,0.28); border-radius:18px; background:#fffaf7;">
+                                  <p style="margin:0 0 8px; color:#70594b; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase;">Total pagado</p>
+                                  <p style="margin:0; color:#2d211b; font-size:30px; line-height:1; font-weight:800;">S/ %.2f</p>
+                                </div>
+
+                                <div style="border-top:1px solid rgba(78,54,39,0.12); padding-top:18px;">
+                                  <p style="margin:0 0 8px; color:#2d211b; font-size:14px; font-weight:700;">Direccion de entrega</p>
+                                  <p style="margin:0; color:#70594b; font-size:14px; line-height:1.7;">%s</p>
+                                  <p style="margin:6px 0 0; color:#8b7667; font-size:12px; line-height:1.6;">%s</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </body>
+                </html>
+                """.formatted(
+                escapeHtml(order.getCustomerName()),
+                order.getId(),
+                rows,
+                order.getTotal(),
+                escapeHtml(order.getShippingAddress()),
+                escapeHtml(order.getShippingReference() == null ? "" : order.getShippingReference())
+        );
+    }
+
+    private String buildOrderItemRow(OrderItem item) {
+        return """
+                <tr>
+                  <td style="padding:12px 0; border-bottom:1px solid rgba(78,54,39,0.12);">
+                    <p style="margin:0; color:#2d211b; font-size:15px; font-weight:700;">%s</p>
+                    <p style="margin:4px 0 0; color:#70594b; font-size:12px;">%s %s · Cantidad: %s</p>
+                  </td>
+                  <td align="right" style="padding:12px 0; border-bottom:1px solid rgba(78,54,39,0.12); color:#2d211b; font-size:14px; font-weight:700;">S/ %.2f</td>
+                </tr>
+                """.formatted(
+                escapeHtml(item.getProduct().getName()),
+                escapeHtml(item.getSizeName() == null ? "" : item.getSizeName()),
+                escapeHtml(item.getSizeDimension() == null ? "" : item.getSizeDimension()),
+                item.getQuantity(),
+                item.getUnitPrice() * item.getQuantity()
+        );
+    }
+
+    private String escapeHtml(String value) {
+        if (value == null) {
+            return "";
+        }
+        return value
+                .replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;");
     }
 }
