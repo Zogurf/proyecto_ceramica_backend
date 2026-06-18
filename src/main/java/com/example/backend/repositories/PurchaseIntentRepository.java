@@ -11,6 +11,8 @@ import java.util.List;
 public interface PurchaseIntentRepository extends JpaRepository<PurchaseIntent, Long> {
     List<PurchaseIntent> findAllByViewedAtBetweenOrderByViewedAtDesc(LocalDateTime start, LocalDateTime end);
 
+    boolean existsByUser_IdAndProduct_IdAndViewedAtAfter(Long userId, Long productId, LocalDateTime viewedAt);
+
     @Query("""
             SELECT intent
             FROM PurchaseIntent intent

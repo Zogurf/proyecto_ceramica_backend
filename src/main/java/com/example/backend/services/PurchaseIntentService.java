@@ -23,15 +23,27 @@ public class PurchaseIntentService {
     private final ProductRepository productRepository;
     private final PurchaseIntentRepository purchaseIntentRepository;
 
+    @Transactional
     public void registerIntent(PurchaseIntentRequest request) {
         User user = currentUserService.getCurrentUser();
         Product product = productRepository.findById(request.productId())
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        LocalDateTime now = LocalDateTime.now();
+
+        boolean alreadyRegistered = purchaseIntentRepository.existsByUser_IdAndProduct_IdAndViewedAtAfter(
+                user.getId(),
+                product.getId(),
+                now.minusMinutes(5)
+        );
+
+        if (alreadyRegistered) {
+            return;
+        }
 
         PurchaseIntent intent = new PurchaseIntent();
         intent.setProduct(product);
         intent.setUser(user);
-        intent.setViewedAt(LocalDateTime.now());
+        intent.setViewedAt(now);
         purchaseIntentRepository.save(intent);
     }
 

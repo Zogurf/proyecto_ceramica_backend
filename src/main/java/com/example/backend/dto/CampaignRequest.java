@@ -7,10 +7,10 @@ import java.time.LocalDate;
 
 public record CampaignRequest(
         @NotNull Long productId,
-        @NotBlank String theme,
         @NotBlank String offerText,
         LocalDate startDate,
         LocalDate endDate,
-        String subject
+        @NotBlank String subject,
+        String htmlTemplate
 ) {
 }

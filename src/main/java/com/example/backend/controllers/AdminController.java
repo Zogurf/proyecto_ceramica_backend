@@ -68,6 +68,11 @@ public class AdminController {
         return purchaseIntentService.getAdminIntentions(startDate, endDate);
     }
 
+    @PostMapping("/campaigns/preview")
+    public CampaignResponse previewCampaign(@Valid @RequestBody CampaignRequest request) {
+        return geminiCampaignService.previewCampaign(request);
+    }
+
     @PostMapping("/campaigns")
     public CampaignResponse sendCampaign(@Valid @RequestBody CampaignRequest request) {
         return geminiCampaignService.sendCampaign(request);
