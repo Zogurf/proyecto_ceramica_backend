@@ -24,6 +24,12 @@ public class OrderItem {
     @Column(nullable = false, name = "unit_price")
     private Double unitPrice;
 
+    @Column(name = "size_name")
+    private String sizeName;
+
+    @Column(name = "size_dimension")
+    private String sizeDimension;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_order")
     private Order order;

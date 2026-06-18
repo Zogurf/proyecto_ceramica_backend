@@ -60,6 +60,48 @@ public class EmailService {
         }
     }
 
+    public void sendMarketingEmail(String toEmail, String subject, String htmlBody) {
+        if (mailHost == null || mailHost.isBlank()) {
+            log.warn("SMTP no configurado. Campana para {} con asunto {} no enviada.", toEmail, subject);
+            return;
+        }
+
+        JavaMailSender mailSender = mailSenderProvider.getIfAvailable();
+        if (mailSender == null) {
+            log.warn("JavaMailSender no disponible. Campana para {} con asunto {} no enviada.", toEmail, subject);
+            return;
+        }
+
+        try {
+            var message = mailSender.createMimeMessage();
+            var helper = new MimeMessageHelper(message, true, "UTF-8");
+            if (fromEmail != null && !fromEmail.isBlank()) {
+                helper.setFrom(fromEmail);
+            }
+            helper.setTo(toEmail);
+            helper.setSubject(subject);
+            helper.setText(stripHtml(htmlBody), htmlBody);
+
+            mailSender.send(message);
+        } catch (MailAuthenticationException ex) {
+            log.error("Gmail rechazo las credenciales SMTP configuradas para {}", fromEmail);
+            throw new RuntimeException("No se pudo autenticar el correo emisor. Revisa la contrasena de aplicacion de Gmail", ex);
+        } catch (MailException ex) {
+            log.error("No se pudo enviar campana a {}: {}", toEmail, ex.getMessage());
+            throw new RuntimeException("No se pudo enviar la campana. Revisa la configuracion SMTP", ex);
+        } catch (Exception ex) {
+            log.error("No se pudo preparar campana para {}: {}", toEmail, ex.getMessage());
+            throw new RuntimeException("No se pudo enviar la campana", ex);
+        }
+    }
+
+    private String stripHtml(String html) {
+        if (html == null) {
+            return "";
+        }
+        return html.replaceAll("<[^>]*>", " ").replaceAll("\\s+", " ").trim();
+    }
+
     private String buildPasswordResetText(String code) {
         return """
                 Hola,

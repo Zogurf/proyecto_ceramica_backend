@@ -24,7 +24,16 @@ public class Payment {
     private LocalDateTime paymentDate;
 
     @Column(nullable = false)
-    private String method; // Aun no se que se usara aca jsjsj
+    private String method;
+
+    @Column(nullable = false)
+    private Double amount;
+
+    @Column(nullable = false)
+    private String status;
+
+    @Column(name = "stripe_session_id", unique = true)
+    private String stripeSessionId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_order")
