@@ -23,6 +23,9 @@ public class PurchaseIntent {
     @Column(nullable = false, name = "viewed_at")
     private LocalDateTime viewedAt;
 
+    @Column(name = "interaction_type", length = 20)
+    private String interactionType;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_product", nullable = false)
     private Product product;

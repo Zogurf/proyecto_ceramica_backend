@@ -8,11 +8,14 @@ import com.example.backend.dto.OrderResponse;
 import com.example.backend.dto.ProductRequest;
 import com.example.backend.dto.PurchaseIntentResponse;
 import com.example.backend.dto.UpdateFulfillmentStatusRequest;
+import com.example.backend.dto.DashboardResponse;
+import com.example.backend.dto.CategoryIntentAnalyticsResponse;
 import com.example.backend.repositories.UserRepository;
 import com.example.backend.services.CheckoutService;
 import com.example.backend.services.GeminiCampaignService;
 import com.example.backend.services.ProductService;
 import com.example.backend.services.PurchaseIntentService;
+import com.example.backend.services.AnalyticsService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +32,19 @@ public class AdminController {
     private final CheckoutService checkoutService;
     private final PurchaseIntentService purchaseIntentService;
     private final GeminiCampaignService geminiCampaignService;
+    private final AnalyticsService analyticsService;
+
+    @GetMapping("/dashboard")
+    public DashboardResponse dashboard() {
+        return analyticsService.dashboard();
+    }
+
+    @GetMapping("/purchase-intentions/categories")
+    public List<CategoryIntentAnalyticsResponse> getCategoryIntentions(
+            @RequestParam(required = false) LocalDate startDate,
+            @RequestParam(required = false) LocalDate endDate) {
+        return analyticsService.categoryIntentions(startDate, endDate);
+    }
 
     @GetMapping("/test")
     public String test() {

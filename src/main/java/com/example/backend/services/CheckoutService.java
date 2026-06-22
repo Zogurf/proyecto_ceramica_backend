@@ -62,6 +62,7 @@ public class CheckoutService {
         order.setCustomerEmail(request.customerEmail().trim().toLowerCase());
         order.setShippingAddress(request.shippingAddress().trim());
         order.setShippingReference(request.shippingReference());
+        order.setCustomerPhone(request.customerPhone().trim());
 
         double total = 0;
         for (CheckoutItemRequest itemRequest : request.items()) {
@@ -162,6 +163,36 @@ public class CheckoutService {
     }
 
     @Transactional
+    public CheckoutResponse retryPayment(Long orderId) {
+        User user = currentUserService.getCurrentUser();
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
+        if (order.getPersona() == null || !order.getPersona().getId().equals(user.getPersona().getId())) {
+            throw new RuntimeException("No tienes acceso a este pedido");
+        }
+        if (!"PENDING".equals(order.getStatus())) {
+            throw new RuntimeException("Este pedido ya fue pagado");
+        }
+
+        if (order.getStripeSessionId() != null) {
+            Map<?, ?> currentSession = retrieveStripeSession(order.getStripeSessionId());
+            if ("open".equals(currentSession.get("status")) && currentSession.get("url") != null) {
+                return new CheckoutResponse((String) currentSession.get("url"), order.getStripeSessionId(), order.getId());
+            }
+        }
+
+        order.getItems().forEach(item -> {
+            if (!item.getProduct().isStatus() || item.getProduct().getStock() < item.getQuantity()) {
+                throw new RuntimeException("Stock insuficiente para " + item.getProduct().getName());
+            }
+        });
+        Map<String, Object> session = createStripeSession(order);
+        order.setStripeSessionId((String) session.get("id"));
+        orderRepository.save(order);
+        return new CheckoutResponse((String) session.get("url"), order.getStripeSessionId(), order.getId());
+    }
+
+    @Transactional
     public OrderResponse updateFulfillmentStatus(Long orderId, UpdateFulfillmentStatusRequest request) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
@@ -228,6 +259,7 @@ public class CheckoutService {
                 order.getCustomerEmail() != null ? order.getCustomerEmail() : "",
                 order.getShippingAddress() != null ? order.getShippingAddress() : "",
                 order.getShippingReference(),
+                order.getCustomerPhone() != null ? order.getCustomerPhone() : "",
                 order.getItems().stream().map(this::toItemResponse).toList()
         );
     }

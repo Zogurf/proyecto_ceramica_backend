@@ -29,12 +29,13 @@ public class PurchaseIntentService {
         Product product = productRepository.findById(request.productId())
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
         LocalDateTime now = LocalDateTime.now();
+        String interactionType = normalizeInteractionType(request.interactionType());
 
-        boolean alreadyRegistered = purchaseIntentRepository.existsByUser_IdAndProduct_IdAndViewedAtAfter(
-                user.getId(),
-                product.getId(),
-                now.minusMinutes(5)
-        );
+        boolean alreadyRegistered = "VIEW".equals(interactionType)
+                ? purchaseIntentRepository.existsByUser_IdAndProduct_IdAndViewedAtAfter(
+                        user.getId(), product.getId(), now.minusMinutes(5))
+                : purchaseIntentRepository.existsByUser_IdAndProduct_IdAndInteractionTypeAndViewedAtAfter(
+                        user.getId(), product.getId(), interactionType, now.minusMinutes(5));
 
         if (alreadyRegistered) {
             return;
@@ -44,6 +45,7 @@ public class PurchaseIntentService {
         intent.setProduct(product);
         intent.setUser(user);
         intent.setViewedAt(now);
+        intent.setInteractionType(interactionType);
         purchaseIntentRepository.save(intent);
     }
 
@@ -67,7 +69,14 @@ public class PurchaseIntentService {
                 intent.getProduct().getName(),
                 user.getPersona() != null ? user.getPersona().getName() : user.getEmail(),
                 user.getEmail(),
+                intent.getProduct().getCategory().getName(),
+                intent.getInteractionType() != null ? intent.getInteractionType() : "VIEW",
                 intent.getViewedAt()
         );
+    }
+
+    private String normalizeInteractionType(String value) {
+        String type = value == null ? "VIEW" : value.trim().toUpperCase();
+        return List.of("VIEW", "CART", "FAVORITE").contains(type) ? type : "VIEW";
     }
 }

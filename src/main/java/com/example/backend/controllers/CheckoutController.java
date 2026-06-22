@@ -41,4 +41,9 @@ public class CheckoutController {
     public OrderResponse getMyOrder(@PathVariable Long orderId) {
         return checkoutService.getMyOrder(orderId);
     }
+
+    @PostMapping("/orders/{orderId}/payment-session")
+    public CheckoutResponse retryPayment(@PathVariable Long orderId) {
+        return checkoutService.retryPayment(orderId);
+    }
 }

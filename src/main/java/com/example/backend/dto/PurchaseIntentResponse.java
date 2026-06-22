@@ -8,6 +8,8 @@ public record PurchaseIntentResponse(
         String productName,
         String customerName,
         String email,
+        String categoryName,
+        String interactionType,
         LocalDateTime viewedAt
 ) {
 }

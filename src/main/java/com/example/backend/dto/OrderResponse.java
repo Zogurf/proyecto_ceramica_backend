@@ -13,6 +13,7 @@ public record OrderResponse(
         String customerEmail,
         String shippingAddress,
         String shippingReference,
+        String customerPhone,
         List<OrderItemResponse> items
 ) {
 }

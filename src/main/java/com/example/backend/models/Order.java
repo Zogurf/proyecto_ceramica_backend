@@ -49,6 +49,9 @@ public class Order {
     @Column(name = "shipping_reference")
     private String shippingReference;
 
+    @Column(name = "customer_phone", length = 20)
+    private String customerPhone;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_client")
     private Persona persona;

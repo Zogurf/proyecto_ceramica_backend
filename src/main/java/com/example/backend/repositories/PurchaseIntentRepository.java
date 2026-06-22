@@ -13,6 +13,9 @@ public interface PurchaseIntentRepository extends JpaRepository<PurchaseIntent, 
 
     boolean existsByUser_IdAndProduct_IdAndViewedAtAfter(Long userId, Long productId, LocalDateTime viewedAt);
 
+    boolean existsByUser_IdAndProduct_IdAndInteractionTypeAndViewedAtAfter(
+            Long userId, Long productId, String interactionType, LocalDateTime viewedAt);
+
     @Query("""
             SELECT intent
             FROM PurchaseIntent intent
@@ -28,4 +31,19 @@ public interface PurchaseIntentRepository extends JpaRepository<PurchaseIntent, 
             @Param("start") LocalDateTime start,
             @Param("end") LocalDateTime end
     );
+
+    @Query("""
+            SELECT intent FROM PurchaseIntent intent
+            JOIN FETCH intent.product product
+            JOIN FETCH product.category
+            JOIN FETCH intent.user user
+            JOIN FETCH user.persona
+            WHERE product.category.id = :categoryId
+              AND intent.viewedAt BETWEEN :start AND :end
+            ORDER BY intent.viewedAt DESC
+            """)
+    List<PurchaseIntent> findCategoryCampaignAudience(
+            @Param("categoryId") Long categoryId,
+            @Param("start") LocalDateTime start,
+            @Param("end") LocalDateTime end);
 }
