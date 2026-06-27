@@ -104,11 +104,23 @@ public class GeminiCampaignService {
     private String buildProductCards(List<Product> products) {
         StringBuilder html = new StringBuilder();
         for (Product product : products) {
-            html.append("<div style=\"padding:14px 0;border-bottom:1px solid #eadbd0\"><strong>")
-                    .append(escapeHtml(product.getName())).append("</strong><span style=\"float:right;color:#7f4c31\">S/ ")
-                    .append(product.getPrice()).append("</span></div>");
+            html.append("<div style=\"display:flex;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid #eadbd0\">");
+            if (isPublicImage(product.getImageUrl())) {
+                html.append("<img src=\"").append(escapeHtml(product.getImageUrl()))
+                        .append("\" alt=\"").append(escapeHtml(product.getName()))
+                        .append("\" width=\"72\" height=\"72\" style=\"width:72px;height:72px;object-fit:cover;border-radius:12px;border:1px solid #eadbd0\"/>");
+            }
+            html.append("<div style=\"flex:1\"><strong>")
+                    .append(escapeHtml(product.getName()))
+                    .append("</strong><div style=\"margin-top:4px;color:#7f4c31;font-weight:700\">S/ ")
+                    .append(product.getPrice())
+                    .append("</div></div></div>");
         }
         return html.toString();
+    }
+
+    private boolean isPublicImage(String imageUrl) {
+        return imageUrl != null && (imageUrl.startsWith("https://") || imageUrl.startsWith("http://"));
     }
 
     private String buildStoreTemplate() {
